@@ -273,10 +273,24 @@ ansible-playbook start.yml
 
 TiDB 兼容 MySQL，因此可使用 MySQL 客户端直接连接 TiDB。推荐配置负载均衡以提供统一的 SQL 接口。
 
-1、使用 MySQL 客户端连接 TiDB 集群。TiDB 服务的默认端口为 4000。
+* 使用 MySQL 客户端连接 TiDB 集群。TiDB 服务的默认端口为 4000。  
+
 ```BASH 
+# 默认密码为空
 mysql -u root -h 172.16.10.1 -P 4000
 ```
-2、通过浏览器访问监控平台。
+
+* 通过浏览器访问监控平台。
 > 地址：http://172.16.10.1:3000
 > 默认帐号与密码：admin；admin
+
+
+* 修改密码
+
+```SQL
+use mysql; 
+select * from user;
+update user set password=password('qiujiahong') where user='root'; 
+flush privileges; 
+
+```
